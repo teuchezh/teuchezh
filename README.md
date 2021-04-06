@@ -6,7 +6,11 @@
   Visitor count<br>
   <img src="https://profile-counter.glitch.me/teuchezh/count.svg" />
 </p>
-
+<p align="center">
+<a href="https://now-playing-66mfrri4j-teuchezh.vercel.app/now-playing?open">
+    <img src="https://now-playing-66mfrri4j-teuchezh.vercel.app/now-playing" width="512" height="128">
+</a>
+</p>
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=teuchezh&count_private=true&show_icons=true&theme=buefy" />
 </p>
