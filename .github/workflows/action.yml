@@ -9,9 +9,13 @@ jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
-      # See action.yml for all options
-      - uses: lowlighter/metrics@latest
+      - name: 🦑 Personal metrics (left)
+        if: ${{ success() || failure() }}
+        uses: lowlighter/metrics@latest
         with:
+          filename: metrics.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: header
           plugin_traffic: yes
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year # Display full year instead of half year
@@ -22,4 +26,3 @@ jobs:
           plugin_wakatime_limit: 4                                  # Show 4 entries per graph
           plugin_wakatime_url: https://wakatime.com                 # Wakatime url endpoint
           plugin_wakatime_user: .user.login                         # User
-          token: ${{ secrets.METRICS_TOKEN }}
