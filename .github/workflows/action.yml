@@ -9,16 +9,23 @@ jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
-      - name: 🦑 Personal metrics (left)
+      - name: Personal metrics
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@latest
         with:
           filename: metrics.svg
           token: ${{ secrets.METRICS_TOKEN }}
-          base: header
+          base: header, activity, repositories
           plugin_traffic: yes
           plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year # Display full year instead of half year
+          plugin_isocalendar_duration: full-year
+          plugin_languages: yes
+          plugin_languages_aliases: "JavaScript:JS, TypeScript:TS"
+          plugin_languages_details: lines, percentage
+          plugin_languages_limit: 8
+          plugin_languages_recent_load: 500
+          plugin_languages_recent_days: 7
+          plugin_languages_sections: most-used, recently-used
           plugin_wakatime: yes
           plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}      # Required
           plugin_wakatime_days: 7                                   # Display last week stats
