@@ -58,7 +58,7 @@ jobs:
           plugin_wakatime_user: teuchezh
           plugin_stock: yes
           plugin_stock_token: ${{ secrets.STOCK_TOKEN }} # RapidAPI Yahoo Finance token
-          plugin_stock_symbol: RUB=X                     # Display RUB to USD stock price
+          plugin_stock_symbol: YNDX                      # Display RUB to USD stock price
           plugin_stock_duration: 1d                      # Display last day of market
           plugin_stock_interval: 5m                      # Use precision of 5 minutes for each record
           plugin_lines: yes
