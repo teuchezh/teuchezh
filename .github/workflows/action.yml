@@ -2,10 +2,10 @@ name: Metrics
 on:
   # Schedule updates (each hour)
   # schedule: [{cron: "0 * * * *"}]
-  schedule: [{cron: "0 */12 * * *"}]
+  schedule: [{ cron: "0 */12 * * *" }]
   # Lines below let you run workflow manually and on each commit
   workflow_dispatch:
-  push: {branches: ["master", "main"]}
+  push: { branches: ["master", "main"] }
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
@@ -14,7 +14,6 @@ jobs:
         with:
           # Your GitHub token
           token: ${{ secrets.METRICS_TOKEN }}
-
           # Options
           user: teuchezh
           template: classic
@@ -29,9 +28,9 @@ jobs:
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
           plugin_topics: yes
-          plugin_topics_sort: stars    # Sort by most starred topics
+          plugin_topics_sort: stars # Sort by most starred topics
           plugin_topics_mode: mastered # Display icons instead of labels
-          plugin_topics_limit: 0       # Disable limitations
+          plugin_topics_limit: 0 # Disable limitations
           plugin_languages: yes
           plugin_languages_colors: github
           plugin_languages_details: lines, percentage
@@ -58,7 +57,19 @@ jobs:
           plugin_wakatime_user: teuchezh
           plugin_stock: yes
           plugin_stock_token: ${{ secrets.STOCK_TOKEN }} # RapidAPI Yahoo Finance token
-          plugin_stock_symbol: YNDX                      # Display RUB to USD stock price
-          plugin_stock_duration: 1d                      # Display last day of market
-          plugin_stock_interval: 5m                      # Use precision of 5 minutes for each record
+          plugin_stock_symbol: YNDX # Display RUB to USD stock price
+          plugin_stock_duration: 1d # Display last day of market
+          plugin_stock_interval: 5m # Use precision of 5 minutes for each record
           plugin_lines: yes
+  snake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
+      - name: generate github-contribution-grid-snake.svg
+        uses: Platane/snk/svg-only@v2
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
