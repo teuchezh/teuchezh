@@ -346,14 +346,14 @@
             </section>
             <section class="column">
                 <h3 class="field">Recently used languages</h3>
-                <small>estimation from 130kb of code in 51 edited files across 18 commits over last 12 days</small>
+                <small>estimation from 130kb of code in 53 edited files across 19 commits over last 13 days</small>
                 <svg class="bar" xmlns="http://www.w3.org/2000/svg" width="460" height="8">
                     <mask id="languages-bar">
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="459.77875751503007" height="8" fill="#00B4AB"/>
-                    <rect mask="url(#languages-bar)" x="459.77875751503007" y="0" width="0.2212424849699399" height="8" fill="#701516"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="459.7792983698694" height="8" fill="#00B4AB"/>
+                    <rect mask="url(#languages-bar)" x="459.7792983698694" y="0" width="0.22070163013057037" height="8" fill="#701516"/>
                 </svg>
                 <div class="row fill-width">
                     <section>
@@ -365,7 +365,7 @@
                                 Dart
                             </div>
                             <small>
-                                <div>3.26k lines</div>
+                                <div>3.27k lines</div>
                                 <div>99.95%</div>
                             </small>
                         </div>
@@ -2467,6 +2467,11 @@
                                 <path fill="#ebedf0" filter="url(#brightness1)" d="M0,1 1.7,2 1.7,2 0,1 z"/>
                                 <path fill="#ebedf0" filter="url(#brightness2)" d="M1.7,2 3.4,1 3.4,1 1.7,2 z"/>
                             </g>
+                            <g transform="translate(-10.2, 12)">
+                                <path fill="#ebedf0" d="M1.7,2 0,1 1.7,0 3.4,1 z"/>
+                                <path fill="#ebedf0" filter="url(#brightness1)" d="M0,1 1.7,2 1.7,2 0,1 z"/>
+                                <path fill="#ebedf0" filter="url(#brightness2)" d="M1.7,2 3.4,1 3.4,1 1.7,2 z"/>
+                            </g>
                         </g>
                     </g>
                 </svg>
@@ -2896,7 +2901,7 @@
                                 <div class="title">
                                     <span class="prefix"></span>
                                     Inspirer
-                                    <span class="gh">ranked 493k out of 211m repositories</span>
+                                    <span class="gh">ranked 492k out of 208m repositories</span>
                                     <div class="value-wrapper">
                                         <div class="value">25</div>
                                     </div>
