@@ -1,85 +1,58 @@
+# Visit https://github.com/lowlighter/metrics#-documentation for full reference
 name: Metrics
 on:
   # Schedule updates (each hour)
-  # schedule: [{cron: "0 * * * *"}]
-  schedule: [{ cron: "0 */12 * * *" }]
+  schedule: [{cron: "0 * * * *"}]
   # Lines below let you run workflow manually and on each commit
   workflow_dispatch:
-  push: { branches: ["master", "main"] }
+  push: {branches: ["master", "main"]}
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: lowlighter/metrics@latest
         with:
           # Your GitHub token
+          # The following scopes are required:
+          #  - public_access (default scope)
+          # The following additional scopes may be required:
+          #  - read:org      (for organization related metrics)
+          #  - read:user     (for user related data)
+          #  - read:packages (for some packages related data)
+          #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.METRICS_TOKEN }}
+
           # Options
           user: teuchezh
           template: classic
-          base: header, activity, repositories, community
+          base: header, activity, community, repositories, metadata
           config_timezone: Europe/Moscow
-          plugin_traffic: yes
           plugin_achievements: yes
-          plugin_achievements_limit: 8
+          plugin_achievements_display: detailed
           plugin_achievements_secrets: yes
-          plugin_achievements_threshold: C
-          plugin_achievements_display: compact
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-          plugin_topics: yes
-          plugin_topics_sort: stars # Sort by most starred topics
-          plugin_topics_mode: mastered # Display icons instead of labels
-          plugin_topics_limit: 0 # Disable limitations
-          plugin_languages: yes
-          plugin_languages_colors: github
-          plugin_languages_details: lines, percentage
-          plugin_languages_indepth: yes
-          plugin_languages_limit: 8
-          plugin_languages_recent_days: 14
-          plugin_languages_recent_load: 300
-          plugin_languages_sections: most-used, recently-used
-          plugin_languages_threshold: 0%
-          plugin_music: yes
-          plugin_music_limit: 4
-          plugin_music_mode: recent
-          plugin_music_provider: lastfm
-          plugin_music_token: ${{ secrets.LASTFM_TOKEN }}
-          plugin_music_time_range: short
-          plugin_music_top_type: tracks
-          plugin_music_user: .user.login
+          plugin_achievements_threshold: X
+          plugin_activity: yes
+          plugin_activity_days: 14
+          plugin_activity_filter: all
+          plugin_activity_limit: 3
+          plugin_activity_load: 300
+          plugin_activity_visibility: all
+          plugin_steam: yes
+          plugin_steam_achievements_limit: 2
+          plugin_steam_games_limit: 1
+          plugin_steam_playtime_threshold: 2
+          plugin_steam_recent_games_limit: 1
+          plugin_steam_sections: player, most-played, recently-played
+          plugin_steam_user: 76561198319589511
+          plugin_stock: yes
+          plugin_stock_duration: 1d
+          plugin_stock_interval: 5m
           plugin_wakatime: yes
-          plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
           plugin_wakatime_days: 7
-          plugin_wakatime_sections: time, projects, projects-graphs, languages, languages-graphs, editors, editors-graph, os, os-graph
           plugin_wakatime_limit: 5
+          plugin_wakatime_repositories_visibility: all
+          plugin_wakatime_sections: time, projects, projects-graphs, languages, languages-graphs, editors, os
           plugin_wakatime_url: https://wakatime.com
           plugin_wakatime_user: teuchezh
-          plugin_stock: yes
-          plugin_stock_token: ${{ secrets.STOCK_TOKEN }} # RapidAPI Yahoo Finance token
-          plugin_stock_symbol: YNDX.ME # Display RUB to USD stock price
-          plugin_stock_duration: 1d # Display last day of market
-          plugin_stock_interval: 5m # Use precision of 5 minutes for each record
-          plugin_lines: yes
-  snake:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
-      - name: generate github-contribution-grid-snake.svg
-        uses: Platane/snk/svg-only@v2
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-                  # push the content of <build_dir> to a branch
-
-      # the content will be available at https://raw.githubusercontent.com/<github_user>/<repository>/<target_branch>/<file> , or as github page
-      - name: push github-contribution-grid-snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v2.6.0
-        with:
-          target_branch: output
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS_TOKEN }}
